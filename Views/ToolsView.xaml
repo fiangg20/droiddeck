@@ -1,0 +1,99 @@
+<UserControl x:Class="Droideck.Views.ToolsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="18"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+      <StackPanel>
+        <TextBlock Text="Tools" Style="{StaticResource H1}" Margin="0,0,0,14"/>
+
+        <Border Style="{StaticResource Card}" Margin="0,0,0,14">
+          <StackPanel>
+            <TextBlock Text="Power" Style="{StaticResource H2}"/>
+            <WrapPanel>
+              <Button Content="Reboot" Tag="" Click="Power_Click"/>
+              <Button Content="Recovery" Tag="recovery" Click="Power_Click"/>
+              <Button Content="Bootloader" Tag="bootloader" Click="Power_Click"/>
+              <Button Content="Fastbootd" Tag="fastboot" Click="Power_Click"/>
+              <Button Content="Power off" Tag="poweroff" Style="{StaticResource DangerButton}" Click="Power_Click"/>
+              <Button Content="Restart ADB" Click="RestartAdb_Click"/>
+            </WrapPanel>
+          </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource Card}" Margin="0,0,0,14">
+          <StackPanel>
+            <TextBlock Text="Fastboot" Style="{StaticResource H2}"/>
+            <TextBlock Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,0,0,6"
+                       Text="For phones that are in bootloader mode. Use 'Bootloader' above, then these."/>
+            <WrapPanel>
+              <Button Content="List devices" Tag="devices" Click="Fastboot_Click"/>
+              <Button Content="Read all info" Tag="getvar all" Click="Fastboot_Click"/>
+              <Button Content="Reboot to system" Tag="reboot" Click="Fastboot_Click"/>
+              <Button Content="Reboot bootloader" Tag="reboot-bootloader" Click="Fastboot_Click"/>
+            </WrapPanel>
+          </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource Card}">
+          <StackPanel>
+            <TextBlock Text="Port forwarding" Style="{StaticResource H2}"/>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+              <TextBox x:Name="PortLocal" Text="8080" ToolTip="PC port"/>
+              <TextBox x:Name="PortRemote" Grid.Column="1" Text="8080" ToolTip="Phone port"/>
+            </Grid>
+            <TextBlock Style="{StaticResource Muted}" Margin="6,0,0,4" Text="PC port   ·   Phone port"/>
+            <WrapPanel>
+              <Button Content="PC → Phone" Click="Forward_Click"/>
+              <Button Content="Phone → PC" Click="Reverse_Click"/>
+              <Button Content="List" Click="ListPorts_Click"/>
+              <Button Content="Remove all" Style="{StaticResource DangerButton}" Click="RemovePorts_Click"/>
+            </WrapPanel>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+    </ScrollViewer>
+
+    <Grid Grid.Column="2">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <Border Style="{StaticResource Card}" Margin="0,46,0,14">
+        <StackPanel>
+          <TextBlock Text="Backup and restore" Style="{StaticResource H2}"/>
+          <WrapPanel>
+            <CheckBox x:Name="BkDcim" Content="DCIM" IsChecked="True"/>
+            <CheckBox x:Name="BkPictures" Content="Pictures" IsChecked="True"/>
+            <CheckBox x:Name="BkDownload" Content="Download" IsChecked="True"/>
+            <CheckBox x:Name="BkDocuments" Content="Documents"/>
+            <CheckBox x:Name="BkMusic" Content="Music"/>
+            <CheckBox x:Name="BkMovies" Content="Movies"/>
+            <CheckBox x:Name="BkApks" Content="App APKs (user apps)" IsChecked="True"/>
+          </WrapPanel>
+          <WrapPanel>
+            <Button Content="Backup..." Style="{StaticResource AccentButton}" Click="Backup_Click"/>
+            <Button Content="Restore..." Click="Restore_Click"/>
+          </WrapPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Grid.Row="1" Style="{StaticResource Card}" Background="{StaticResource BgBrush}" Padding="6">
+        <TextBox x:Name="Output" IsReadOnly="True" AcceptsReturn="True" TextWrapping="NoWrap"
+                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                 VerticalContentAlignment="Top" FontFamily="JetBrains Mono, Consolas" FontSize="12"
+                 Background="Transparent" BorderThickness="0"/>
+      </Border>
+    </Grid>
+  </Grid>
+</UserControl>

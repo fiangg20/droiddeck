@@ -1,0 +1,85 @@
+<UserControl x:Class="Droideck.Views.FilesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <TextBlock Text="Files" Style="{StaticResource H1}"/>
+
+    <Border Grid.Row="1" Style="{StaticResource Card}" Padding="12" Margin="0,14,0,14">
+      <StackPanel>
+        <DockPanel>
+          <Button DockPanel.Dock="Left" Content="Up" Click="Up_Click"/>
+          <Button DockPanel.Dock="Left" Content="Storage" Click="Home_Click"/>
+          <Button DockPanel.Dock="Left" Content="&#xE72C;" Style="{StaticResource IconButton}" ToolTip="Reload" Click="Reload_Click"/>
+          <TextBox DockPanel.Dock="Right" x:Name="FilterBox" Width="170" TextChanged="Filter_Changed" ToolTip="Filter this folder"/>
+          <TextBox x:Name="PathBox" KeyDown="PathBox_KeyDown"/>
+        </DockPanel>
+        <WrapPanel>
+          <Button Content="Push files..." Click="PushFiles_Click"/>
+          <Button Content="Push folder..." Click="PushFolder_Click"/>
+          <Button Content="Pull selected..." Style="{StaticResource AccentButton}" Click="Pull_Click"/>
+          <Button Content="New folder" Click="NewFolder_Click"/>
+          <Button Content="Rename" Click="Rename_Click"/>
+          <Button Content="Delete" Style="{StaticResource DangerButton}" Click="Delete_Click"/>
+        </WrapPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Grid.Row="2" Style="{StaticResource Card}" Padding="8">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="10,2,10,8">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition Width="150"/>
+          </Grid.ColumnDefinitions>
+          <TextBlock Text="Name" Style="{StaticResource Muted}"/>
+          <TextBlock Grid.Column="1" Text="Size" Style="{StaticResource Muted}"/>
+          <TextBlock Grid.Column="2" Text="Modified" Style="{StaticResource Muted}"/>
+        </Grid>
+        <ListBox x:Name="FileList" Grid.Row="1" SelectionMode="Extended" AllowDrop="True"
+                 Drop="FileList_Drop" MouseDoubleClick="FileList_DoubleClick">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="110"/>
+                  <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <DockPanel>
+                  <TextBlock DockPanel.Dock="Left" Text="{Binding Glyph}" FontFamily="{StaticResource Glyphs}" Foreground="{Binding GlyphBrush}"
+                             Width="24" VerticalAlignment="Center"/>
+                  <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+                </DockPanel>
+                <TextBlock Grid.Column="1" Text="{Binding SizeText}" Foreground="{StaticResource MutedBrush}"/>
+                <TextBlock Grid.Column="2" Text="{Binding Date}" Foreground="{StaticResource MutedBrush}"/>
+              </Grid>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock x:Name="DropHint" Grid.Row="1" Text="Drop files here to push them to this folder"
+                   Style="{StaticResource Muted}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,8" IsHitTestVisible="False"/>
+      </Grid>
+    </Border>
+
+    <Grid Grid.Row="3" Margin="0,10,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="200"/>
+      </Grid.ColumnDefinitions>
+      <TextBlock x:Name="InfoText" Style="{StaticResource Muted}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+      <ProgressBar x:Name="Busy" Grid.Column="1" IsIndeterminate="True" Visibility="Hidden"/>
+    </Grid>
+  </Grid>
+</UserControl>

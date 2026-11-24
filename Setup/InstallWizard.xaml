@@ -1,0 +1,87 @@
+<Window x:Class="Droideck.Setup.InstallWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Droideck Setup" Width="780" Height="500" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" Background="{StaticResource PanelBrush}"
+        Icon="pack://application:,,,/app.ico" FontFamily="Segoe UI" FontSize="13"
+        TextElement.Foreground="{StaticResource FgBrush}">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="210"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <Border Background="{StaticResource BgBrush}" Padding="24,28">
+      <StackPanel>
+        <Image Source="pack://application:,,,/app.ico" Width="64" Height="64" HorizontalAlignment="Left"/>
+        <TextBlock Text="Droideck" FontSize="20" FontWeight="SemiBold" Margin="0,14,0,0"/>
+        <TextBlock Text="ADB command center" Style="{StaticResource Muted}"/>
+        <StackPanel Margin="0,36,0,0">
+          <TextBlock x:Name="Step0" Text="1   Welcome" Margin="0,0,0,12"/>
+          <TextBlock x:Name="Step1" Text="2   Options" Margin="0,0,0,12"/>
+          <TextBlock x:Name="Step2" Text="3   Installing" Margin="0,0,0,12"/>
+          <TextBlock x:Name="Step3" Text="4   Finish" Margin="0,0,0,12"/>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Grid Grid.Column="1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <Grid Grid.Row="0" Margin="32,30,32,16">
+        <StackPanel x:Name="Page0">
+          <TextBlock Text="Welcome to Droideck" Style="{StaticResource H1}" FontSize="22"/>
+          <TextBlock TextWrapping="Wrap" Margin="0,14,0,0" Foreground="{StaticResource MutedBrush}"
+                     Text="Droideck controls your Android phone from Windows: mirror the screen, browse files, manage apps, read logs, run macros and more."/>
+          <TextBlock TextWrapping="Wrap" Margin="0,12,0,0" Foreground="{StaticResource MutedBrush}"
+                     Text="Setup copies Droideck to your user folder, adds shortcuts, and downloads Google's ADB tools. No administrator rights are needed."/>
+        </StackPanel>
+
+        <StackPanel x:Name="Page1" Visibility="Collapsed">
+          <TextBlock Text="Install options" Style="{StaticResource H1}" FontSize="22"/>
+          <TextBlock Text="Install folder" Margin="0,18,0,4" Foreground="{StaticResource MutedBrush}"/>
+          <DockPanel>
+            <Button DockPanel.Dock="Right" Content="Browse..." Click="Browse_Click"/>
+            <TextBox x:Name="DirBox"/>
+          </DockPanel>
+          <CheckBox x:Name="DesktopCheck" Content="Create a desktop shortcut" IsChecked="True" Margin="3,18,0,4"/>
+          <CheckBox x:Name="StartCheck" Content="Add Droideck to the Start menu" IsChecked="True" Margin="3,4,0,4"/>
+          <CheckBox x:Name="AdbCheck" Content="Download Android platform-tools (ADB), about 8 MB" IsChecked="True" Margin="3,4,0,4"/>
+          <TextBlock x:Name="DirNote" Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="3,14,0,0"/>
+        </StackPanel>
+
+        <StackPanel x:Name="Page2" Visibility="Collapsed">
+          <TextBlock Text="Installing" Style="{StaticResource H1}" FontSize="22"/>
+          <TextBlock x:Name="StatusText" Text="Starting..." Margin="0,18,0,8" TextWrapping="Wrap"/>
+          <ProgressBar x:Name="Bar" Maximum="100"/>
+          <TextBox x:Name="LogBox" IsReadOnly="True" AcceptsReturn="True" Height="180" Margin="0,16,0,0"
+                   VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Top" FontFamily="JetBrains Mono, Consolas" FontSize="12"
+                   Background="{StaticResource BgBrush}"/>
+        </StackPanel>
+
+        <StackPanel x:Name="Page3" Visibility="Collapsed">
+          <TextBlock Text="Droideck is ready" Style="{StaticResource H1}" FontSize="22"/>
+          <TextBlock x:Name="DoneText" TextWrapping="Wrap" Margin="0,14,0,0" Foreground="{StaticResource MutedBrush}"/>
+          <CheckBox x:Name="LaunchCheck" Content="Launch Droideck now" IsChecked="True" Margin="3,22,0,0"/>
+        </StackPanel>
+      </Grid>
+
+      <Border Grid.Row="1" BorderBrush="{StaticResource BgBrush}" BorderThickness="0,1,0,0" Padding="20,12">
+        <DockPanel>
+          <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            <Button x:Name="BackBtn" Content="Back" Width="84" Visibility="Collapsed" Click="Back_Click"/>
+            <Button x:Name="NextBtn" Content="Next" Width="96" Style="{StaticResource AccentButton}" Click="Next_Click"/>
+            <Button x:Name="CancelBtn" Content="Cancel" Width="84" Click="Cancel_Click"/>
+          </StackPanel>
+          <StackPanel x:Name="PortablePanel" Orientation="Horizontal">
+            <Button Content="Run without installing" Click="Portable_Click"/>
+            <CheckBox x:Name="DontAsk" Content="Don't ask again" VerticalAlignment="Center"/>
+          </StackPanel>
+        </DockPanel>
+      </Border>
+    </Grid>
+  </Grid>
+</Window>

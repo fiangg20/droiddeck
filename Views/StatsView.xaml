@@ -1,0 +1,56 @@
+<UserControl x:Class="Droideck.Views.StatsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Droideck.Controls">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <TextBlock Text="Live stats" Style="{StaticResource H1}"/>
+
+    <UniformGrid Grid.Row="1" Columns="2" Rows="2" Margin="0,14,0,0">
+      <Border Style="{StaticResource Card}" Margin="0,0,8,8">
+        <DockPanel>
+          <StackPanel DockPanel.Dock="Top">
+            <TextBlock Text="CPU" Style="{StaticResource Muted}"/>
+            <TextBlock x:Name="CpuText" Text="–" FontSize="30" FontWeight="SemiBold"/>
+            <TextBlock x:Name="CpuSub" Style="{StaticResource Muted}" Margin="0,0,0,8"/>
+          </StackPanel>
+          <c:GraphControl x:Name="CpuGraph" MinHeight="80"/>
+        </DockPanel>
+      </Border>
+      <Border Style="{StaticResource Card}" Margin="8,0,0,8">
+        <DockPanel>
+          <StackPanel DockPanel.Dock="Top">
+            <TextBlock Text="Memory" Style="{StaticResource Muted}"/>
+            <TextBlock x:Name="MemText" Text="–" FontSize="30" FontWeight="SemiBold"/>
+            <TextBlock x:Name="MemSub" Style="{StaticResource Muted}" Margin="0,0,0,8"/>
+          </StackPanel>
+          <c:GraphControl x:Name="MemGraph" MinHeight="80"/>
+        </DockPanel>
+      </Border>
+      <Border Style="{StaticResource Card}" Margin="0,8,8,0">
+        <DockPanel>
+          <StackPanel DockPanel.Dock="Top">
+            <TextBlock Text="Network download" Style="{StaticResource Muted}"/>
+            <TextBlock x:Name="NetText" Text="–" FontSize="30" FontWeight="SemiBold"/>
+            <TextBlock x:Name="NetSub" Style="{StaticResource Muted}" Margin="0,0,0,8"/>
+          </StackPanel>
+          <c:GraphControl x:Name="NetGraph" MinHeight="80"/>
+        </DockPanel>
+      </Border>
+      <Border Style="{StaticResource Card}" Margin="8,8,0,0">
+        <DockPanel>
+          <StackPanel DockPanel.Dock="Top">
+            <TextBlock Text="Battery" Style="{StaticResource Muted}"/>
+            <TextBlock x:Name="BatText" Text="–" FontSize="30" FontWeight="SemiBold"/>
+            <TextBlock x:Name="BatSub" Style="{StaticResource Muted}" Margin="0,0,0,8"/>
+          </StackPanel>
+          <c:GraphControl x:Name="BatGraph" MinHeight="80"/>
+        </DockPanel>
+      </Border>
+    </UniformGrid>
+  </Grid>
+</UserControl>

@@ -1,0 +1,19 @@
+<Window x:Class="Droideck.Setup.UninstallWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Uninstall Droideck" Width="500" SizeToContent="Height" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" Background="{StaticResource PanelBrush}"
+        Icon="pack://application:,,,/app.ico" FontFamily="Segoe UI" FontSize="13"
+        TextElement.Foreground="{StaticResource FgBrush}">
+  <StackPanel Margin="28">
+    <TextBlock x:Name="TitleText" Text="Uninstall Droideck" Style="{StaticResource H1}" FontSize="20"/>
+    <TextBlock x:Name="Body" TextWrapping="Wrap" Margin="0,14,0,0" Foreground="{StaticResource MutedBrush}"
+               Text="This removes Droideck, its shortcuts and its entry in Windows Settings. Your phone and your files are not touched."/>
+    <CheckBox x:Name="DataCheck" Content="Also remove the downloaded ADB tools and my saved settings" Margin="3,18,0,0"/>
+    <ProgressBar x:Name="Bar" IsIndeterminate="True" Margin="0,18,0,0" Visibility="Collapsed"/>
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,24,0,0">
+      <Button x:Name="GoBtn" Content="Uninstall" Width="96" Style="{StaticResource DangerButton}" Click="Go_Click"/>
+      <Button x:Name="CloseBtn" Content="Cancel" Width="96" Click="Close_Click"/>
+    </StackPanel>
+  </StackPanel>
+</Window>
