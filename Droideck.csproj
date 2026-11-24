@@ -20,6 +20,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Using Include="System.IO" />
+    <Using Include="System.Net.Http" />
     <Resource Include="app.ico" />
   </ItemGroup>
 
